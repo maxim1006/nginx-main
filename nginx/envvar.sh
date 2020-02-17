@@ -12,6 +12,9 @@ else
   echo "set \$gateway http://${PUBLIC_GATEWAY_HOST}.${NAMESPACE}.svc.cluster.local:${PUBLIC_GATEWAY_PORT};" > /etc/nginx/envvars.conf
 fi
 
+echo "set \$gateway ${PUBLIC_GATEWAY_URL};" >> /etc/nginx/envvars.conf
+echo "set \$toms ${TOMS_URL};" >> /etc/nginx/envvars.conf
+
 echo "set \$journeyUI ${JM_JOURNEY_UI};" >> /etc/nginx/envvars.conf
 sed -i -e 's#PUBLIC_GATEWAY_URL#'"${PUBLIC_GATEWAY_URL}"'#g' /usr/share/nginx/html/assets/config/config.prod.json
 sed -i -e 's#DEFAULT_TENANT_DNS_NAME#'"${CJM_DEFAULT_TENANT_NAME}"'#g' /usr/share/nginx/html/assets/config/config.prod.json
